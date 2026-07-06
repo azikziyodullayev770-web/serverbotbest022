@@ -1,6 +1,9 @@
+import { Markup } from 'telegraf';
+import { config } from '../config.js';
+
 export const startCommand = async (ctx) => {
   try {
-    const message = `👨‍⚕️ Assalomu alaykum!
+    const message = `👨‍⚕️ Assalomu alaykum! (Yangi versiya)
 
 Men Doctor Urolog Firdavs AI yordamchisiman.
 
@@ -10,13 +13,9 @@ Men Doctor Urolog Firdavs AI yordamchisiman.
 
 👇 Boshlash uchun quyidagi tugmani bosing!`;
 
-    await ctx.reply(message, {
-      reply_markup: {
-        inline_keyboard: [
-          [{ text: '🤖 Doctor AI', callback_data: 'doctor_ai_start' }]
-        ]
-      }
-    });
+    await ctx.reply(message, Markup.inlineKeyboard([
+      Markup.button.webApp('👉 DOCTOR AI', config.WEBAPP_URL)
+    ]));
   } catch (error) {
     console.error('Start command error:', error);
   }
